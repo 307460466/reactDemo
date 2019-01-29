@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+  <script type="text/babel">
+    class Hello extends React.Component {
+      constructor (props){
+        super(props);
+        this.state = {
+          opacity: 1.0
+        }
+      }
+
+      ComponentDidMount (){
+        this.timer = setInterval(function(){
+          var opacity = this.state.opacity;
+          opacity -= .05;
+          if (opacity < 0.1){
+            opacity = 1.0;
+          }
+          this.setSate({
+            opacity: opacity
+          });
+        }.bind(this), 1000);
+      }
+
+      render (){
+        return (
+          <div style={{opacity: this.state.opacity}}>
+            Hello {this.state.opacity}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Hello />,
+      document.getElementById('example')
+    );
+  </script>
+</head>
+
+<body>
+  <div id="example"></div>
+</body>
+
+</html>
